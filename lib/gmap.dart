@@ -14,6 +14,8 @@ class _GMapState extends State<GMap> {
   Set<Marker> _markers = HashSet<Marker>();
   Set<Polygon> _polygons = HashSet<Polygon>();
   Set<Polyline> _polylines = HashSet<Polyline>();
+  Set<Circle> _circles = HashSet<Circle>();
+
 
   GoogleMapController _mapController;
   BitmapDescriptor _markerIcon;
@@ -24,10 +26,22 @@ class _GMapState extends State<GMap> {
     _setMarkerIcon();
     _setPolygon();
     _setPolylines();
+    _setCircles();
   }
 
   void _setMarkerIcon() async{
     _markerIcon = await BitmapDescriptor.fromAssetImage(ImageConfiguration(), "assets/noodle_icon.png");
+  }
+
+  void _setCircles(){
+    _circles.add(
+      Circle(
+        circleId: CircleId("0"),
+        center: LatLng(7.291518,80.636796),
+        radius: 1000,
+        fillColor: Color.fromRGBO(102, 51, 153, 0.5),
+      ),
+    );
   }
 
   void _setPolylines(){
@@ -95,6 +109,7 @@ class _GMapState extends State<GMap> {
             markers: _markers,
             polygons: _polygons,
             polylines: _polylines,
+            circles: _circles,
           ),
           Container(
             alignment: Alignment.bottomCenter,

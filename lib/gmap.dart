@@ -39,6 +39,7 @@ class _GMapState extends State<GMap> {
         circleId: CircleId("0"),
         center: LatLng(7.291518,80.636796),
         radius: 1000,
+        strokeWidth: 2,
         fillColor: Color.fromRGBO(102, 51, 153, 0.5),
       ),
     );
@@ -110,6 +111,7 @@ class _GMapState extends State<GMap> {
             polygons: _polygons,
             polylines: _polylines,
             circles: _circles,
+            myLocationEnabled: true,
           ),
           Container(
             alignment: Alignment.bottomCenter,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps/gmap.dart';
+import 'package:location/location.dart';
 
 void main() {
   runApp(MyApp());
@@ -30,6 +31,21 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  @override
+  void initState() {
+    super.initState();
+    _getLocationPermission();
+  }
+
+  void _getLocationPermission() async {
+    var location = Location();
+    try {
+      location.requestPermission();
+    } on Exception catch (_) {
+      print('There was a problem allowing location access');
+    }
+  }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(

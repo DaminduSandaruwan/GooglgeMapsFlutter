@@ -11,9 +11,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         
         primarySwatch: Colors.blue,
+        brightness: Brightness.dark,
         
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
@@ -32,7 +34,8 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Map'),
+        title: Text('Google Map'),
+        centerTitle: true,
       ),
       body: Container(
         padding: EdgeInsets.all(16),
@@ -44,6 +47,7 @@ class _HomeState extends State<Home> {
                 style: TextStyle(
                   fontSize: 42,
                 ),
+                textAlign: TextAlign.center,
               ),
               SizedBox(height: 20,),
               Text(

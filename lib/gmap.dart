@@ -12,6 +12,8 @@ class GMap extends StatefulWidget {
 class _GMapState extends State<GMap> {
 
   Set<Marker> _markers = HashSet<Marker>();
+  Set<Polygon> _polygons = HashSet<Polygon>();
+
   GoogleMapController _mapController;
   BitmapDescriptor _markerIcon;
 
@@ -19,10 +21,26 @@ class _GMapState extends State<GMap> {
   void initState() {
     super.initState();
     _setMarkerIcon();
+    _setPolygon();
   }
 
   void _setMarkerIcon() async{
     _markerIcon = await BitmapDescriptor.fromAssetImage(ImageConfiguration(), "assets/noodle_icon.png");
+  }
+
+  void _setPolygon(){
+    List<LatLng> polygonLatLongs = List<LatLng>();
+    polygonLatLongs.add(LatLng(7.291418,80.636696)); //Kandy
+    polygonLatLongs.add(LatLng(6.053519,80.220978)); //Galle
+    polygonLatLongs.add(LatLng(6.872916,79.888634)); //Nugegoda    
+    polygonLatLongs.add(LatLng(7.189464,79.858734)); //Negombo
+
+    _polygons.add(Polygon(
+      polygonId: PolygonId("0"),
+      points: polygonLatLongs,
+      strokeWidth: 1,
+    ));
+
   }
 
   void _onMapCreated(GoogleMapController controller){
@@ -57,6 +75,7 @@ class _GMapState extends State<GMap> {
               zoom: 12,
             ),
             markers: _markers,
+            polygons: _polygons,
           ),
           Container(
             alignment: Alignment.bottomCenter,

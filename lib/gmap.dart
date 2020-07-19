@@ -13,6 +13,7 @@ class _GMapState extends State<GMap> {
 
   Set<Marker> _markers = HashSet<Marker>();
   Set<Polygon> _polygons = HashSet<Polygon>();
+  Set<Polyline> _polylines = HashSet<Polyline>();
 
   GoogleMapController _mapController;
   BitmapDescriptor _markerIcon;
@@ -22,10 +23,26 @@ class _GMapState extends State<GMap> {
     super.initState();
     _setMarkerIcon();
     _setPolygon();
+    _setPolylines();
   }
 
   void _setMarkerIcon() async{
     _markerIcon = await BitmapDescriptor.fromAssetImage(ImageConfiguration(), "assets/noodle_icon.png");
+  }
+
+  void _setPolylines(){
+    List<LatLng> polygonLatLongs = List<LatLng>();
+    polygonLatLongs.add(LatLng(7.291418,80.636696)); 
+    polygonLatLongs.add(LatLng(7.053519,80.220978)); 
+    polygonLatLongs.add(LatLng(7.872916,79.888634));    
+    polygonLatLongs.add(LatLng(7.189464,79.858734)); 
+
+    _polylines.add(Polyline(
+      polylineId: PolylineId("0"),
+      points: polygonLatLongs,
+      color: Colors.red,
+      width: 1,
+    ));
   }
 
   void _setPolygon(){
@@ -38,6 +55,7 @@ class _GMapState extends State<GMap> {
     _polygons.add(Polygon(
       polygonId: PolygonId("0"),
       points: polygonLatLongs,
+      fillColor: Colors.white,
       strokeWidth: 1,
     ));
 
@@ -76,6 +94,7 @@ class _GMapState extends State<GMap> {
             ),
             markers: _markers,
             polygons: _polygons,
+            polylines: _polylines,
           ),
           Container(
             alignment: Alignment.bottomCenter,

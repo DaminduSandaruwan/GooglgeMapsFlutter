@@ -33,6 +33,12 @@ class _GMapState extends State<GMap> {
     _markerIcon = await BitmapDescriptor.fromAssetImage(ImageConfiguration(), "assets/noodle_icon.png");
   }
 
+  void _setMapStyle() async{
+    String style = await DefaultAssetBundle.of(context).loadString('assets/map_style.json');
+    _mapController.setMapStyle(style);
+
+  }
+
   void _setCircles(){
     _circles.add(
       Circle(
@@ -91,6 +97,7 @@ class _GMapState extends State<GMap> {
         )
       );
     });
+    _setMapStyle();
   }
 
   @override
